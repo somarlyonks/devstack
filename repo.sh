@@ -18,15 +18,15 @@ else
 fi
 
 repos=(
-    "https://github.com/edx/course-discovery.git"
-    "https://github.com/edx/credentials.git"
-    "https://github.com/edx/cs_comments_service.git"
-    "https://github.com/edx/ecommerce.git"
-    "https://github.com/edx/edx-e2e-tests.git"
-    "https://github.com/edx/edx-notes-api.git"
-    "https://github.com/edx/edx-platform.git"
-    "https://github.com/edx/xqueue.git"
-    "https://github.com/edx/edx-analytics-pipeline.git"
+    "https://github.com/Learningtribes/course-discovery.git"
+    "https://github.com/Learningtribes/credentials.git"
+    "https://github.com/Learningtribes/cs_comments_service.git"
+    "https://github.com/Learningtribes/ecommerce.git"
+    "https://github.com/Learningtribes/edx-e2e-tests.git"
+    "https://github.com/Learningtribes/edx-notes-api.git"
+    "https://github.com/Learningtribes/platform.git"
+    "https://github.com/Learningtribes/xqueue.git"
+    "https://github.com/Learningtribes/edx-analytics-pipeline.git"
 )
 
 private_repos=(
@@ -34,7 +34,7 @@ private_repos=(
     "https://github.com/edx/edx-themes.git"
 )
 
-name_pattern=".*edx/(.*).git"
+name_pattern=".*Learningtribes/(.*).git"
 
 _checkout ()
 {
@@ -90,7 +90,9 @@ _clone ()
                 git clone $repo
             fi
             if [ -n "${OPENEDX_RELEASE}" ]; then
+                cd $name
                 git checkout open-release/${OPENEDX_RELEASE}
+                cd ..
             fi
         fi
     done

@@ -352,12 +352,12 @@ How do I build images?
 There are `Docker CI Jenkins jobs`_ on tools-edx-jenkins that build and push new
 Docker images to DockerHub on code changes to either the configuration repository or the IDA's codebase. These images
 are tagged according to the branch from which they were built (see NOTES below).
-If you want to build the images on your own, the Dockerfiles are available in the ``edx/configuration`` repo.
+If you want to build the images on your own, the Dockerfiles are available in the ``Learningtribes/configuration`` repo.
 
 NOTES:
 
 1. edxapp and IDAs use the ``latest`` tag for configuration changes which have been merged to master branch of
-   their repository and ``edx/configuration``.
+   their repository and ``Learningtribes/configuration``.
 2. Images for a named Open edX release are built from the corresponding branch
    of each repository and tagged appropriately, for example ``hawthorn.master``
    or ``hawthorn.rc1``.
