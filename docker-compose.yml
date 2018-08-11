@@ -14,7 +14,7 @@ services:
   # Third-party services
   chrome:
     container_name: edx.devstack.chrome
-    image: ltdps/chrome:hawthorn.lt
+    image: ltdps/chrome:hawthorn.1
     shm_size: 2g
     ports:
       - "15900:5900"
@@ -35,7 +35,7 @@ services:
 
   firefox:
     container_name: edx.devstack.firefox
-    image: ltdps/firefox:hawthorn.lt
+    image: ltdps/firefox:hawthorn.1
     shm_size: 2g
     ports:
       - "25900:5900"
@@ -88,7 +88,7 @@ services:
       DB_HOST: edx.devstack.mysql
       SOCIAL_AUTH_EDX_OIDC_URL_ROOT: http://edx.devstack.lms:18000/oauth2
       ENABLE_DJANGO_TOOLBAR: 1
-    image: ltdps/credentials:hawthorn.lt
+    image: ltdps/credentials:hawthorn.1
     ports:
       - "18150:18150"
 
@@ -105,7 +105,7 @@ services:
     environment:
       TEST_ELASTICSEARCH_URL: "http://edx.devstack.elasticsearch:9200"
       ENABLE_DJANGO_TOOLBAR: 1
-    image: ltdps/discovery:hawthorn.lt
+    image: ltdps/discovery:hawthorn.1
     ports:
       - "18381:18381"
     volumes:
@@ -122,7 +122,7 @@ services:
     tty: true
     environment:
       ENABLE_DJANGO_TOOLBAR: 0
-    image: ltdps/ecommerce:hawthorn.lt
+    image: ltdps/ecommerce:hawthorn.1
     ports:
       - "18130:18130"
 
@@ -159,7 +159,7 @@ services:
       - devpi
       - elasticsearch
       - mysql
-    image: ltdps/notes:hawthorn.lt
+    image: ltdps/notes:hawthorn.1
     ports:
       - "18120:18120"
     environment:
@@ -205,13 +205,13 @@ services:
       - mongo
       - memcached
       - elasticsearch
-    image: ltdps/forum:hawthorn.lt
+    image: ltdps/forum:hawthorn.1
     ports:
       - "44567:4567"
 
   devpi:
     container_name: edx.devstack.devpi
-    image: ltdps/devpi:hawthorn.lt
+    image: ltdps/devpi:hawthorn.1
     ports:
       - "3141:3141"
     volumes:
