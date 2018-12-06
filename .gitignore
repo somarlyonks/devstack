@@ -99,3 +99,5 @@ ENV/
 
 # Personal makefile extensions
 local.mk
+
+.autoenv*

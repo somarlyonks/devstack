@@ -14,7 +14,7 @@ services:
   # Third-party services
   chrome:
     container_name: edx.devstack.chrome
-    image: ltdps/chrome:hawthorn.1
+    image: ltdps/chrome:latest
     shm_size: 2g
     ports:
       - "15900:5900"
@@ -35,7 +35,7 @@ services:
 
   firefox:
     container_name: edx.devstack.firefox
-    image: ltdps/firefox:hawthorn.1
+    image: ltdps/firefox:latest
     shm_size: 2g
     ports:
       - "25900:5900"
