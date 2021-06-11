@@ -277,3 +277,10 @@ check-memory: ## Check if enough memory has been allocated to Docker
 
 stats: ## Get per-container CPU and memory utilization data
 	docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
+
+# dev shortcuts
+lms-webpack:
+	docker exec -t edx.devstack.lms bash -c 'source /edx/app/edxapp/edxapp_env && cd /edx/app/edxapp/edx-platform/ && paver webpack --settings devstack_docker'
+
+lms-theme:
+	docker exec -t edx.devstack.lms bash -c 'source /edx/app/edxapp/edxapp_env && cd /edx/app/edxapp/edx-platform/ && python manage.py lms --settings=devstack_docker compile_sass lms'

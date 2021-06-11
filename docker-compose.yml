@@ -8,40 +8,38 @@
 # - Every service's container name should be prefixed with "edx.devstack." to avoid conflicts with other containers
 #   that might be running for the same service.
 
-version: "2.1"
+version: "2.4"
 
 services:
   # Third-party services
-  chrome:
-    container_name: edx.devstack.chrome
-    image: ltdps/chrome:latest
-    shm_size: 2g
-    ports:
-      - "15900:5900"
-    volumes:  # for file uploads
-      - ../edx-e2e-tests/upload_files:/edx/app/e2e/edx-e2e-tests/upload_files
-      - ../edx-platform/common/test/data:/edx/app/edxapp/edx-platform/common/test/data
+  # chrome:
+  #   container_name: edx.devstack.chrome
+  #   image: ltdps/chrome:latest
+  #   shm_size: 2g
+  #   ports:
+  #     - "15900:5900"
+  #   volumes:  # for file uploads
+  #     - ../edx-e2e-tests/upload_files:/edx/app/e2e/edx-e2e-tests/upload_files
+  #     - ../edx-platform/common/test/data:/edx/app/edxapp/edx-platform/common/test/data
 
   elasticsearch:
     container_name: edx.devstack.elasticsearch
-    image: edxops/elasticsearch:devstack
-    # TODO: What to do about these forwarded ports? They'll conflict with ports forwarded by the Vagrant VM.
-    # ports:
-    #   - "9200:9200"
-    #   - "9300:9300"
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-      - elasticsearch_data:/usr/share/elasticsearch/logs
-
-  firefox:
-    container_name: edx.devstack.firefox
-    image: ltdps/firefox:latest
-    shm_size: 2g
+    image: nginx:latest
     ports:
-      - "25900:5900"
-    volumes:  # for file uploads
-      - ../edx-e2e-tests/upload_files:/edx/app/e2e/edx-e2e-tests/upload_files
-      - ../edx-platform/common/test/data:/edx/app/edxapp/edx-platform/common/test/data
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch.conf:/etc/nginx/conf.d/default.conf
+
+  # firefox:
+  #   container_name: edx.devstack.firefox
+  #   image: ltdps/firefox:latest
+  #   shm_size: 2g
+  #   ports:
+  #     - "25900:5900"
+  #   volumes:  # for file uploads
+  #     - ../edx-e2e-tests/upload_files:/edx/app/e2e/edx-e2e-tests/upload_files
+  #     - ../edx-platform/common/test/data:/edx/app/edxapp/edx-platform/common/test/data
 
   memcached:
     container_name: edx.devstack.memcached
@@ -50,20 +48,17 @@ services:
     #   - "11211:11211"
 
   mongo:
-    # We use WiredTiger in all environments. In development environments we use small files
-    # to conserve disk space, and disable the journal for a minor performance gain.
-    # See https://docs.mongodb.com/v3.0/reference/program/mongod/#options for complete details.
-    command: mongod --smallfiles --nojournal --storageEngine wiredTiger
     container_name: edx.devstack.mongo
-    image: mongo:3.2.16
-    # ports:
-    #  - "27017:27017"
+    image: nginx:latest
+    ports:
+      - "27017:27017"
     volumes:
-      - mongo_data:/data/db
+      - ./mongo.conf:/etc/nginx/nginx.conf
 
   mysql:
     command: mysqld --character-set-server=utf8 --collation-server=utf8_general_ci
     container_name: edx.devstack.mysql
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: ""
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
